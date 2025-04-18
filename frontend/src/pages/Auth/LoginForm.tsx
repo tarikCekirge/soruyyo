@@ -36,7 +36,7 @@ const LoginForm = () => {
 
     return (
         <AuthLayout>
-            <div className="lg:w-[80%] h-3/4 md:h-full flex flex-col justify-center">
+            <div className="lg:w-[60%] h-3/4 md:h-full flex flex-col justify-center">
                 <h3 className="scroll-m-20 text-2xl font-medium tracking-tight lg:text-3xl text-primary">
                     Tekrar Hoşgeldin
                 </h3>
