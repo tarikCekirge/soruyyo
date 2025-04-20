@@ -8,7 +8,7 @@ const UserSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     profileImg: { type: String, required: true },
-    bookmarked: { type: mongoose.Schema.Types.ObjectId, ref: "Sor" },
+    bookmarked: [{ type: mongoose.Schema.Types.ObjectId, ref: "Sor" }],
   },
   { timestamps: true }
 );
