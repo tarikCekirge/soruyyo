@@ -1,9 +1,14 @@
+import DashboardLayout from "@/components/layout/DashboardLayout"
 
 const Home = () => {
     return (
-        <div>
-            <h1>Welcome Dashboard</h1>
-        </div>
+        <>
+            <DashboardLayout activeMunu="Home">
+                <div className="container mx-auto">
+                    asdasdas
+                </div>
+            </DashboardLayout>
+        </>
     )
 }
 

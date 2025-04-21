@@ -49,7 +49,6 @@ const LoginForm = () => {
     }, [form, errorMessage]);
 
     async function onSubmit(values: LoginFormValues) {
-        console.log(values);
         try {
             const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, values);
             const { token, user } = response.data;
