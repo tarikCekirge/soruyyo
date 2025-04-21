@@ -12,7 +12,7 @@ exports.registerUser = async (req, res) => {
   const { fullName, username, email, password, profileImg } = req.body;
 
   // Validation: Check for missing fields
-  if (!fullName || !username || !email || !password) {
+  if (!fullName || !username || !email || !password || !profileImg) {
     return res.status(400).json({ message: "Tüm alanlar zorunlu." });
   }
 
@@ -68,7 +68,7 @@ exports.registerUser = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Sunucu hatası." });
+    res.status(500).json({ message: "Sunucu hatası. Sonra tekrar deneyin." });
   }
 };
 

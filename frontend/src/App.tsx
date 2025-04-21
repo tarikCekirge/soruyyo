@@ -7,7 +7,9 @@ import VotedPolls from "./pages/Dashboard/VotedPolls";
 import Bookmarks from "./pages/Dashboard/Bookmarks";
 import LoginForm from "./pages/Auth/LoginForm";
 import SignUpForm from "./pages/Auth/SignUpForm";
-import UserProvider, { useUser } from "./context/UserContext"; // Import useUser hook
+import UserProvider from "./context/UserContext";
+import { Toaster } from "@/components/ui/sonner"
+
 
 const App = () => {
   return (
@@ -24,6 +26,7 @@ const App = () => {
           <Route path="/bookmarked-polls" element={<Bookmarks />} />
         </Routes>
       </Router>
+      <Toaster richColors />
     </UserProvider>
   );
 };
@@ -31,11 +34,11 @@ const App = () => {
 export default App;
 
 const Root = () => {
-  const { user } = useUser();
-
-  if (user) {
+  const token = localStorage.getItem("token");
+  if (token) {
     return <Navigate to="/dashboard" />;
   } else {
     return <Navigate to="/giris" />;
   }
 };
+

@@ -4,6 +4,12 @@ const MAX_FILE_SIZE = 1024 * 1024 * 3; // 3MB
 
 export const authFormSchema = z
   .object({
+    fullName: z
+      .string({ message: "Ad Soyad zorunludur" })
+      .min(4, { message: "Ad Soyad en az 4 karakter olmalıdır." })
+      .regex(/^[a-zA-ZşŞıİçÇğĞüÜöÖ\s]+$/, {
+        message: "Ad Soyad sadece harflerden oluşmalıdır.",
+      }),
     username: z
       .string()
       .min(4, { message: "Kullanıcı adı en az 4 karakter olmalıdır." })
@@ -18,7 +24,7 @@ export const authFormSchema = z
     confirmPassword: z
       .string()
       .min(6, { message: "Şifre tekrarı en az 6 karakter olmalıdır." }),
-    profilePic: z
+    profileImg: z
       .string({ message: "Profil fotoğrafı zorunludur." })
       .refine((value) => value.startsWith("data:image/"), {
         message: "Sadece .jpg, .jpeg, .png veya .webp formatları geçerlidir.",

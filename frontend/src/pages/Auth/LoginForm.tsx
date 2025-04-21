@@ -19,10 +19,12 @@ import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "@/utils/axiosInstance";
 import { API_PATHS } from "@/utils/apiPaths";
 import { AxiosError } from "axios";
+import { useUser } from "@/context/UserContext";
 
 const LoginForm = () => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string>("");
+    const { updateUser } = useUser();
     const navigate = useNavigate();
     const form = useForm<LoginFormValues>({
         resolver: zodResolver(loginFormSchema),
@@ -52,6 +54,7 @@ const LoginForm = () => {
             const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, values);
             const { token, user } = response.data;
             if (token) {
+                updateUser(user)
                 localStorage.setItem("token", token);
                 navigate("/dashboard")
             }
