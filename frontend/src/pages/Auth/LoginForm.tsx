@@ -14,11 +14,16 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axiosInstance from "@/utils/axiosInstance";
+import { API_PATHS } from "@/utils/apiPaths";
+import { AxiosError } from "axios";
 
 const LoginForm = () => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
+    const [errorMessage, setErrorMessage] = useState<string>("");
+    const navigate = useNavigate();
     const form = useForm<LoginFormValues>({
         resolver: zodResolver(loginFormSchema),
         defaultValues: {
@@ -30,8 +35,36 @@ const LoginForm = () => {
 
     const { isDirty, isValid } = form.formState;
 
-    function onSubmit(values: LoginFormValues) {
+
+    useEffect(() => {
+        const subscription = form.watch(() => {
+            if (errorMessage) {
+                setErrorMessage("");
+            }
+        });
+
+        return () => subscription.unsubscribe();
+    }, [form, errorMessage]);
+
+    async function onSubmit(values: LoginFormValues) {
         console.log(values);
+        try {
+            const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, values);
+            const { token, user } = response.data;
+            if (token) {
+                localStorage.setItem("token", token);
+                navigate("/dashboard")
+            }
+        } catch (error: unknown) {
+            const err = error as AxiosError<any>;
+            if (err.response && err.response.data.message) {
+                console.error('ERROR', err.response.data.message);
+                setErrorMessage(err.response.data.message);
+            } else {
+                console.error('ERROR', "Bir şeyler ters gitti");
+                setErrorMessage("Bir şeyler ters gitti");
+            }
+        }
     }
 
     return (
@@ -86,6 +119,11 @@ const LoginForm = () => {
                                 </FormItem>
                             )}
                         />
+                        {errorMessage && (
+                            <div className="text-red-500 text-sm mt-2">
+                                {errorMessage}
+                            </div>
+                        )}
 
                         <Button type="submit" disabled={!isDirty || !isValid}>Giriş Yap</Button>
                     </form>
