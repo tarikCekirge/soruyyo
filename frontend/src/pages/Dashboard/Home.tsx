@@ -1,11 +1,14 @@
 import DashboardLayout from "@/components/layout/DashboardLayout"
+import UserDetailCard from "@/components/UserDetailCard"
+import { useUser } from "@/context/UserContext"
 
 const Home = () => {
+    const { user } = useUser()
     return (
         <>
-            <DashboardLayout activeMunu="Home">
+            <DashboardLayout activeMenu="Dashboard">
                 <div className="container mx-auto">
-                    asdasdas
+                    {user && <UserDetailCard user={user} />}
                 </div>
             </DashboardLayout>
         </>

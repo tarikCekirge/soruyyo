@@ -1,8 +1,10 @@
+import DashboardLayout from "@/components/layout/DashboardLayout"
+
 const VotedPolls = () => {
     return (
-        <div>
-
-        </div>
+        <DashboardLayout activeMenu="Oylanan Anketler">
+            <div>Oylanan Anketler</div>
+        </DashboardLayout>
     )
 }
 

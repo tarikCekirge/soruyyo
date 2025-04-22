@@ -53,7 +53,8 @@ const LoginForm = () => {
             const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, values);
             const { token, user } = response.data;
             if (token) {
-                updateUser(user)
+                const { password, ...safeUser } = user;
+                updateUser(safeUser)
                 localStorage.setItem("token", token);
                 navigate("/dashboard")
             }

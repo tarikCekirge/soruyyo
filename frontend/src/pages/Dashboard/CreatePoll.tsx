@@ -1,10 +1,10 @@
-import React from 'react'
+import DashboardLayout from '@/components/layout/DashboardLayout'
 
 const CreatePoll = () => {
     return (
-        <div>
-
-        </div>
+        <DashboardLayout activeMenu='Yeni Anket' >
+            <div>Yeni Anket</div>
+        </DashboardLayout>
     )
 }
 

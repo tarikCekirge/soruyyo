@@ -1,10 +1,10 @@
-import React from 'react'
+import DashboardLayout from '@/components/layout/DashboardLayout'
 
 const Bookmarks = () => {
     return (
-        <div>
-
-        </div>
+        <DashboardLayout activeMenu="Kaydedilenler">
+            <div>Kaydedilenler</div>
+        </DashboardLayout>
     )
 }
 

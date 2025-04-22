@@ -17,13 +17,13 @@ const App = () => {
       <Router>
         <Routes>
           <Route path="/" element={<Root />} />
-          <Route path="/giris" element={<LoginForm />} />
-          <Route path="/kayit-ol" element={<SignUpForm />} />
-          <Route path="/dashboard" element={<Home />} />
-          <Route path="/create-poll" element={<CreatePoll />} />
-          <Route path="/my-polls" element={<MyPolls />} />
-          <Route path="/voted-polls" element={<VotedPolls />} />
-          <Route path="/bookmarked-polls" element={<Bookmarks />} />
+          <Route path="giris" element={<LoginForm />} />
+          <Route path="kayit-ol" element={<SignUpForm />} />
+          <Route path="dashboard" element={<Home />} />
+          <Route path="yeni-anket" element={<CreatePoll />} />
+          <Route path="anketlerim" element={<MyPolls />} />
+          <Route path="oylananlar" element={<VotedPolls />} />
+          <Route path="kaydedilenler" element={<Bookmarks />} />
         </Routes>
       </Router>
       <Toaster richColors />

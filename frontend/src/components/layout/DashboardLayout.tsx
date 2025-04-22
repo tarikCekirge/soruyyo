@@ -1,19 +1,19 @@
 import { ReactNode } from "react"
 import { Navbar } from "../common/Navbar"
-import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "../common/app-sidebar"
 
 type Props = {
     children: ReactNode,
-    activeMunu: string
+    activeMenu: string
 }
-const DashboardLayout = ({ children, activeMunu }: Props) => {
+const DashboardLayout = ({ children, activeMenu }: Props) => {
     return (
         <>
             <Navbar />
             <div className="relative">
                 <SidebarProvider >
-                    <AppSidebar />
+                    <AppSidebar activeMenu={activeMenu} />
                     <main className="w-full flex-1">
                         <div className="container mx-auto ">
                             <SidebarTrigger />

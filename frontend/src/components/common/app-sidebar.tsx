@@ -1,4 +1,3 @@
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
 
 import {
     Sidebar,
@@ -11,39 +10,29 @@ import {
     SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import { SIDE_MENU_DATA } from "@/utils/data"
-import { Link } from "react-router-dom"
-
-// Menu items.
-const items = [
-    {
-        title: "Home",
-        url: "#",
-        icon: Home,
-    },
-    {
-        title: "Inbox",
-        url: "#",
-        icon: Inbox,
-    },
-    {
-        title: "Calendar",
-        url: "#",
-        icon: Calendar,
-    },
-    {
-        title: "Search",
-        url: "#",
-        icon: Search,
-    },
-    {
-        title: "Settings",
-        url: "#",
-        icon: Settings,
-    },
-]
+import { useNavigate } from "react-router-dom"
+import { Button } from "../ui/button"
+import { useUser } from "@/context/UserContext";
 
 
-export function AppSidebar() {
+
+
+export function AppSidebar({ activeMenu }: { activeMenu: string }) {
+    const { clearUser } = useUser();
+    const navigate = useNavigate()
+
+    const handleClick = (route: string) => {
+        if (route === "/cikis") {
+            handleLogout()
+        }
+        navigate(route)
+
+    }
+    const handleLogout = () => {
+        localStorage.clear();
+        clearUser()
+        navigate("/giris")
+    }
     return (
         <Sidebar variant="sidebar" collapsible="icon" className="pt-14" >
             <SidebarContent>
@@ -59,12 +48,10 @@ export function AppSidebar() {
                             {SIDE_MENU_DATA.map((item) => (
                                 <SidebarMenuItem key={item.id}>
                                     <SidebarMenuButton asChild size={"lg"}>
-                                        <div>
-                                            <Link to={item.path} className="flex items-center pl-1">
-                                                <item.icon size={24} className="min-w-6 mr-2" />
-                                                <span>{item.label}</span>
-                                            </Link>
-                                        </div>
+                                        <Button variant={activeMenu === item.label ? "outline" : "ghost"} onClick={() => handleClick(item.path)} className="flex items-center justify-start w-full">
+                                            <item.icon size={24} className="min-w-6 ml-1" />
+                                            <span>{item.label}</span>
+                                        </Button>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
                             ))}
